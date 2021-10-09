@@ -1,59 +1,26 @@
 import React, { Component } from "react";
 import Modal from "./components/Modal";
 import axios from "axios";
-
-import Login from './components/Login/Login';
-
-
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
-
-
-// function setToken(userToken) {
-//   sessionStorage.setItem('token', JSON.stringify(userToken));
-// }
-
-// function getToken() {
-//   const tokenString = sessionStorage.getItem('token');
-//   const userToken = JSON.parse(tokenString);
-//   return userToken?.token
-// }
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isAuthenticated: true,
       viewCompleted: false,
       todoList: [],
       modal: false,
       activeItem: {
-        task: "",
+        title: "",
+        description: "",
         completed: false,
       },
     };
   }
 
-
   componentDidMount() {
-    this.getToken();
     this.refreshList();
-  }
-
-  getToken = () => {
-    if (sessionStorage.getItem("token") !== null) {
-      if (!sessionStorage.getItem("token").includes("access")) {
-        return this.setState({isAuthenticated: false});
-      }
-    }else {
-      return this.setState({ isAuthenticated: false });
-    }
-    return this.setState({ isAuthenticated: true });
-  };
-
-  setToken = (userToken) => {
-    sessionStorage.setItem('token', JSON.stringify(userToken));
-    this.getToken()
   }
 
   refreshList = () => {
@@ -88,7 +55,7 @@ class App extends Component {
   };
 
   createItem = () => {
-    const item = { task: "", completed: false };
+    const item = { title: "", description: "", completed: false };
 
     this.setState({ activeItem: item, modal: !this.state.modal });
   };
@@ -162,13 +129,6 @@ class App extends Component {
   };
 
   render() {
-
-
-
-    if(!this.state.isAuthenticated) {
-      return <Login setToken={this.setToken} />
-    }
-
     return (
       <main className="container">
         <h1 className="text-black text-uppercase text-center my-4">Todo app</h1>
