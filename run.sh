@@ -8,10 +8,10 @@ virtualenv venv
 
 source venv/bin/activate
 
-pip3 install -r ./backend/requirements.txt
+pip3 install -r ./todo-backend/requirements.txt
 
 sudo apt install npm
 
 npm install react-scripts
 
-python3 ./backend/manage.py runserver & npm start
+python3 ./todo-backend/manage.py runserver & npm start
