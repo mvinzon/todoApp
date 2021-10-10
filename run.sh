@@ -2,16 +2,15 @@
 
 sudo apt install python3-pip
 
+# Install and start a virtualenv
 sudo pip3 install virtualenv
-
 virtualenv venv
-
 source venv/bin/activate
 
-pip3 install -r ./todo-backend/requirements.txt
-
+# Install back and front requirements
+sudo pip3 install -r ./todo-backend/requirements.txt
 sudo apt install npm
-
 npm install react-scripts
 
-python3 ./todo-backend/manage.py runserver & npm start
+# Start both servers
+sudo python3 ./todo-backend/manage.py runserver & npm start

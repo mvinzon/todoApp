@@ -9,16 +9,6 @@ axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
 
-// function setToken(userToken) {
-//   sessionStorage.setItem('token', JSON.stringify(userToken));
-// }
-
-// function getToken() {
-//   const tokenString = sessionStorage.getItem('token');
-//   const userToken = JSON.parse(tokenString);
-//   return userToken?.token
-// }
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -56,6 +46,10 @@ class App extends Component {
     this.getToken()
   }
 
+  clearToken = () => {
+    sessionStorage.clear();
+    this.getToken()
+  }
   refreshList = () => {
     axios
       .get("/api/todos/")
@@ -176,6 +170,14 @@ class App extends Component {
           <div className="col-md-6 col-sm-10 mx-auto p-0">
             <div className="card p-3">
               <div className="mb-4">
+                <button
+                  style={{float: 'right'}}
+                  className="btn btn-outline-primary"
+                  onClick={this.clearToken}
+                >
+                  Logout
+                </button>
+
                 <button
                   className="btn btn-primary"
                   onClick={this.createItem}
